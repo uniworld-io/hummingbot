@@ -22,6 +22,9 @@ RUN curl https://repo.anaconda.com/miniconda/Miniconda3-py38_4.8.2-Linux-x86_64.
     ~/miniconda3/bin/conda update -n base conda -y && \
     ~/miniconda3/bin/conda clean -tipsy
 
+# Fix ubuntu 20.04 libffi.so.6 actually point to 8.1.0
+RUN ln -s ~/miniconda3/lib/libffi.so.8.1.0 ~/miniconda3/lib/libffi.so.6
+
 # Dropping default ~/.bashrc because it will return if not running as interactive shell, thus not invoking PATH settings
 RUN :> ~/.bashrc
 
